@@ -1,0 +1,61 @@
+{
+    "classified" : {
+        "dynamic" : "false",
+        "properties" : {
+            "id" : {
+                "type" : "long",
+                "index" : "not_analyzed"
+            },
+            "status" : {
+                "type" : "string",
+                "index" : "not_analyzed"
+            },
+            "updated" : {
+                "type" : "date",
+                "format" : "date_time"
+            },
+            "expires" : {
+                "type" : "date",
+                "format" : "date_time"
+            },
+            "created" : {
+                "type" : "date",
+                "format" : "date_time"
+            },
+            "price" : {
+                "type" : "float"
+            },
+            "email" : {
+                "type" : "string",
+                "index" : "not_analyzed"
+            },
+            "reference" : {
+                "type" : "string",
+                "index" : "not_analyzed"
+            },
+            "title" : {
+                "type" : "string"
+            },
+            "description" : {
+                "type" : "string"
+            },
+            "location" : {
+                "properties" : {
+                    "streetAddress" : {
+                        "type" : "string"
+                    },
+                    "city" : {
+                        "type" : "string"
+                    },
+                    "postalCode" : {
+                        "type" : "string"
+                    },
+                    "countryCode" : {
+                        "type" : "string",
+                        "index" : "not_analyzed"
+                    }
+                }
+            }
+        }
+    }
+}

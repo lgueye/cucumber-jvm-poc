@@ -1,0 +1,8 @@
+index:
+    analysis:
+        analyzer:
+            default:
+                tokenizer:      standard
+                filter:         [standard, lowercase, asciifolding]
+path:
+    data: target

@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNull;
  * User: lgueye\n Date: 15/02/12\n Time: 13:59\n
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:webservice-bootstrap.xml"})
+@ContextConfiguration(locations = {"classpath:cucumber-jvm-poc.xml"})
 @TransactionConfiguration(defaultRollback = true)
 @Transactional
 public class ClassifiedPersistenceTestIT {

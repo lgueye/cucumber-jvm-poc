@@ -12,11 +12,11 @@ import org.diveintojee.poc.cucumberjvm.domain.search.OrderBy;
 import org.diveintojee.poc.cucumberjvm.domain.search.SearchQuery;
 import org.diveintojee.poc.cucumberjvm.domain.search.SearchResult;
 import org.diveintojee.poc.cucumberjvm.domain.search.SortOrder;
+import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.client.action.bulk.BulkRequestBuilder;
-import org.elasticsearch.client.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
 
 import static org.elasticsearch.search.sort.SortOrder.ASC;
 import static org.elasticsearch.search.sort.SortOrder.DESC;
@@ -114,7 +113,7 @@ public class SearchEngineImpl implements SearchEngine {
       searchRequestBuilder.setSize(itemsPerPage);
 
       final int from = Math.max(query.getPageIndex() * itemsPerPage,
-                               ELASTIC_SEARCH_FIRST_RESULT_INDEX);
+                                ELASTIC_SEARCH_FIRST_RESULT_INDEX);
       searchRequestBuilder.setFrom(from);
 
       QueryBuilder queryBuilder = queryBuilderResolver.resolveQueryBuilder(query);
@@ -149,7 +148,6 @@ public class SearchEngineImpl implements SearchEngine {
   }
 
   void applyDefaultSort(final SearchRequestBuilder searchRequestBuilder) {
-    //System.out.println("Applying default sort (updated desc)");
     searchRequestBuilder.addSort(OrderBy.DEFAULT.getField(), DESC);
   }
 
@@ -161,7 +159,8 @@ public class SearchEngineImpl implements SearchEngine {
 
     Collection<String> orderFields = Collections2.transform(orderByList, GetField.INSTANCE);
 
-    return (CollectionUtils.isEmpty(orderFields) || !orderFields.contains(OrderBy.DEFAULT.getField()));
+    return (CollectionUtils.isEmpty(orderFields) || !orderFields
+        .contains(OrderBy.DEFAULT.getField()));
 
   }
 

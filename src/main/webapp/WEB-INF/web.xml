@@ -14,7 +14,7 @@
         - Applied by ContextLoaderListener. -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/webservice-bootstrap-servlet.xml</param-value>
+        <param-value>WEB-INF/cucumber-jvm-poc-servlet.xml</param-value>
     </context-param>
 
     <listener>

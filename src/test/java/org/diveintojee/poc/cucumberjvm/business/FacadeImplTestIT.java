@@ -29,7 +29,7 @@ import static org.junit.Assert.assertTrue;
  * User: lgueye Date: 15/02/12 Time: 17:15
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:webservice-bootstrap.xml"})
+@ContextConfiguration(locations = {"classpath:cucumber-jvm-poc.xml"})
 public class FacadeImplTestIT {
 
   @Autowired

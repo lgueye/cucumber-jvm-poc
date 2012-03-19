@@ -6,6 +6,6 @@
 	<persistence-unit name="webservice-bootstrap-persistence-unit"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>fr.figaroclassifieds.bootstraps.webservice.domain.Classified</class>
+		<class>org.diveintojee.poc.cucumberjvm.domain.Classified</class>
 	</persistence-unit>
 </persistence>

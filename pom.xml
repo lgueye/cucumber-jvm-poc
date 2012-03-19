@@ -18,20 +18,21 @@
 		<tagArg>@wip</tagArg>
 		<format>html</format>
 
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- TEST -->
+        <asm.version>3.2</asm.version>
+        <antlr.version>3.4</antlr.version>
+        <cucumber-jvm.version>1.0.0.RC21</cucumber-jvm.version>
+        <cucumber-html.version>0.2.1</cucumber-html.version>
+        <gherkin.version>2.9.1</gherkin.version>
+        <junit.version>4.10</junit.version>
+        <mockito.version>1.9.0</mockito.version>
+        <log4j.version>1.2.16</log4j.version>
 
-		<asm.version>3.2</asm.version>
-		<antlr.version>3.4</antlr.version>
-		<cucumber-jvm.version>1.0.0.RC20</cucumber-jvm.version>
-		<cucumber-html.version>0.2.1</cucumber-html.version>
-		<exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
-		<gherkin.version>2.9.0</gherkin.version>
-		<junit.version>4.10</junit.version>
-		<mockito.version>1.9.0</mockito.version>
-		<log4j.version>1.2.16</log4j.version>
-
-		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
+        <!-- BUILD -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
+        <maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 		<maven-clean-plugin.version>2.4.1</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
 		<maven-deploy-plugin.version>2.7</maven-deploy-plugin.version>
@@ -40,8 +41,23 @@
 		<maven-resources-plugin.version>2.5</maven-resources-plugin.version>
 		<maven-site-plugin.version>3.0</maven-site-plugin.version>
 		<maven-surefire-plugin.version>2.12</maven-surefire-plugin.version>
+		<maven-war-plugin.version>2.2</maven-war-plugin.version>
 
-	</properties>
+        <!-- APP -->
+        <spring.version>3.1.1.RELEASE</spring.version>
+        <slf4j-api.version>1.6.4</slf4j-api.version>
+        <validation-api.version>1.0.0.GA</validation-api.version>
+        <hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
+        <commons-lang3.version>3.1</commons-lang3.version>
+        <guava.version>11.0.2</guava.version>
+        <commons-collections.version>3.2.1</commons-collections.version>
+        <jackson.version>1.9.5</jackson.version>
+        <elasticsearch.version>0.19.0</elasticsearch.version>
+        <commons-io.version>2.1</commons-io.version>
+        <hibernate-entitymanager.version>4.1.1.Final</hibernate-entitymanager.version>
+        <jersey.version>1.12</jersey.version>
+        <servlet-api.version>2.5</servlet-api.version>
+    </properties>
 
 	<dependencyManagement>
 		<dependencies>
@@ -49,41 +65,43 @@
 				<groupId>asm</groupId>
 				<artifactId>asm</artifactId>
 				<version>${asm.version}</version>
+                <scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>info.cukes</groupId>
 				<artifactId>cucumber-jvm</artifactId>
 				<version>${cucumber-jvm.version}</version>
+                <scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>info.cukes</groupId>
 				<artifactId>cucumber-core</artifactId>
 				<version>${cucumber-jvm.version}</version>
+                <scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>info.cukes</groupId>
 				<artifactId>cucumber-java</artifactId>
 				<version>${cucumber-jvm.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>info.cukes</groupId>
-				<artifactId>cucumber-junit</artifactId>
-				<version>${cucumber-jvm.version}</version>
+                <scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>info.cukes</groupId>
 				<artifactId>cucumber-html</artifactId>
 				<version>${cucumber-html.version}</version>
+                <scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>info.cukes</groupId>
 				<artifactId>gherkin</artifactId>
 				<version>${gherkin.version}</version>
+                <scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
+                <scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>log4j</groupId>
@@ -94,141 +112,219 @@
 				<groupId>org.antlr</groupId>
 				<artifactId>antlr</artifactId>
 				<version>${antlr.version}</version>
+                <scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-all</artifactId>
 				<version>${mockito.version}</version>
+                <scope>test</scope>
 			</dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons-collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate-entitymanager.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-server</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey.contribs</groupId>
+                <artifactId>jersey-spring</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+                <scope>provided</scope>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 
 
 	<dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>asm</groupId>
 			<artifactId>asm</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-core</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-html</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>gherkin</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr</artifactId>
-			<scope>test</scope>
 		</dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.4</version>
         </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.0.0.GA</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>4.2.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>r09</version>
         </dependency>
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.2</version>
         </dependency>
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-            <version>0.18.4</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>1.4</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.0.0.CR1</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-core</artifactId>
-            <version>1.10</version>
+            <artifactId>jersey-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-spring</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>1.10</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
     </dependencies>
 
@@ -280,6 +376,16 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven-surefire-plugin.version}</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${maven-war-plugin.version}</version>
+				</plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin.version}</version>
+                </plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -293,7 +399,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>${exec-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<phase>verify</phase>
@@ -304,18 +409,10 @@
 							<classpathScope>test</classpathScope>
 							<mainClass>cucumber.cli.Main</mainClass>
 							<arguments>
-								<argument>--format</argument>
-								<argument>${format}</argument>
-								<argument>--strict</argument>
-								<argument>--out</argument>
-								<argument>target/reports</argument>
 								<argument>--glue</argument>
 								<argument>target/test-classes</argument>
-								<argument>target/test-classes/.</argument>
 								<argument>--tags</argument>
 								<argument>~@ignore</argument>
-								<argument>--tags</argument>
-								<argument>${tagArg}</argument>
 							</arguments>
 						</configuration>
 					</execution>

@@ -10,7 +10,8 @@
 		</layout>
 	</appender>
 
-<!-- Uncomment if you wish to inspect requests header and/or body
+<!--
+Uncomment if you wish to inspect requests header and/or body
 	<logger name="httpclient.wire.header">
 		<level value="debug" />
 	</logger>

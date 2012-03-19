@@ -17,8 +17,8 @@
 	<logger name="httpclient.wire.content">
 		<level value="debug" />
 	</logger>
- -->
-	<!-- Root Logger -->
+-->
+ 	<!-- Root Logger -->
 
 	<root>
 		<priority value="warn" />

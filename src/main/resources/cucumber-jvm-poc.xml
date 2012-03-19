@@ -8,11 +8,10 @@
 	http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
     <context:component-scan
-            base-package="fr.figaroclassifieds.bootstraps.webservice"/>
+            base-package="org.diveintojee.poc.cucumberjvm"/>
 
     <bean id="propertyConfigurer" class=
             "org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="locations">
             <list>
                 <value>classpath:persistence.properties</value>
@@ -54,7 +53,7 @@
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="webservice-bootstrap-persistence-unit"/>
+        <property name="persistenceUnitName" value="cucumber-jvm-poc-persistence-unit"/>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>

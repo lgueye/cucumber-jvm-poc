@@ -26,7 +26,7 @@ import static org.junit.Assert.assertNull;
 @Transactional
 public class ClassifiedPersistenceTestIT {
 
-  @PersistenceContext(unitName = "webservice-bootstrap-persistence-unit")
+  @PersistenceContext(unitName = "cucumber-jvm-poc-persistence-unit")
   private EntityManager entityManager;
 
   @Test

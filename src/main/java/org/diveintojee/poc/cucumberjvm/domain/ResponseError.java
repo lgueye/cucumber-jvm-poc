@@ -15,7 +15,6 @@ public class ResponseError {
    *
    */
   public ResponseError() {
-    super();
   }
 
   /**
@@ -38,7 +37,7 @@ public class ResponseError {
   /**
    * @param message the message to set
    */
-  private void setMessage(String message) {
+  public void setMessage(String message) {
     this.message = message;
   }
 
@@ -52,7 +51,7 @@ public class ResponseError {
   /**
    * @param httpStatus the httpStatus to set
    */
-  private void setHttpStatus(int httpStatus) {
+  public void setHttpStatus(int httpStatus) {
     this.httpStatus = httpStatus;
   }
 

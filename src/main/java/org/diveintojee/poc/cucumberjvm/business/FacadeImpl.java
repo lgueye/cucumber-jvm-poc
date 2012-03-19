@@ -27,7 +27,7 @@ import javax.persistence.criteria.CriteriaQuery;
 @Service
 public class FacadeImpl implements Facade {
 
-  @PersistenceContext(unitName = "webservice-bootstrap-persistence-unit")
+  @PersistenceContext(unitName = "cucumber-jvm-poc-persistence-unit")
   private EntityManager entityManager;
 
   @Autowired

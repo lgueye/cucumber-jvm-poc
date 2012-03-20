@@ -2,13 +2,11 @@ package org.diveintojee.poc.cucumberjvm.persistence;
 
 import org.diveintojee.poc.cucumberjvm.domain.Classified;
 import org.diveintojee.poc.cucumberjvm.persistence.search.SearchEngine;
-import org.hibernate.event.spi.PostDeleteEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -29,39 +27,39 @@ public class AbstractPostEventListenerTest {
 
   @Test
   public void removeFromIndexShouldSucceed() throws Exception {
-      Classified classified;
-      Long id;
+    Classified classified;
+    Long id;
 
-      // Given
-      classified = mock(Classified.class);
-      id = 8L;
+    // Given
+    classified = mock(Classified.class);
+    id = 8L;
 
-      // When
-      when(classified.getId()).thenReturn(id);
-      underTest.removeFromIndex(classified);
+    // When
+    when(classified.getId()).thenReturn(id);
+    underTest.removeFromIndex(classified);
 
-      // Then
-      verify(searchEngine).removeFromIndex(id);
-      verify(classified).getId();
-      verifyNoMoreInteractions(searchEngine, classified);
+    // Then
+    verify(searchEngine).removeFromIndex(id);
+    verify(classified).getId();
+    verifyNoMoreInteractions(searchEngine, classified);
   }
 
   @Test
   public void indexShouldSucceed() throws Exception {
-      Classified classified;
-      Long id;
+    Classified classified;
+    Long id;
 
-      // Given
-      classified = mock(Classified.class);
-      id = 8L;
+    // Given
+    classified = mock(Classified.class);
+    id = 8L;
 
-      // When
-      when(classified.getId()).thenReturn(id);
-      underTest.index(classified);
+    // When
+    when(classified.getId()).thenReturn(id);
+    underTest.index(classified);
 
-      // Then
-      verify(searchEngine).index(classified, id);
-      verify(classified).getId();
+    // Then
+    verify(searchEngine).index(classified, id);
+    verify(classified).getId();
     verifyNoMoreInteractions(searchEngine, classified);
   }
 

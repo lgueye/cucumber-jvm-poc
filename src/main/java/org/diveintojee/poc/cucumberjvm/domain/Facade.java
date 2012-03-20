@@ -1,9 +1,9 @@
 package org.diveintojee.poc.cucumberjvm.domain;
 
-import java.util.List;
-
 import org.diveintojee.poc.cucumberjvm.domain.search.SearchQuery;
 import org.diveintojee.poc.cucumberjvm.domain.search.SearchResult;
+
+import java.util.List;
 
 
 /**

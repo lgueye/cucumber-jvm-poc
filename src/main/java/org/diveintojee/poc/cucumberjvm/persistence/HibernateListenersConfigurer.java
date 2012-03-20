@@ -53,11 +53,11 @@ public class HibernateListenersConfigurer {
 
     registry.getEventListenerGroup(EventType.PRE_INSERT).prependListener(preInsertEventListener);
     registry.getEventListenerGroup(EventType.PRE_UPDATE).prependListener(preUpdateEventListener);
-    
+
     registry.getEventListenerGroup(EventType.POST_INSERT).prependListener(postInsertEventListener);
     registry.getEventListenerGroup(EventType.POST_UPDATE).prependListener(postUpdateEventListener);
     registry.getEventListenerGroup(EventType.POST_DELETE).prependListener(postDeleteEventListener);
-    
+
   }
 
 }

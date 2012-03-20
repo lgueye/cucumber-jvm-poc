@@ -20,7 +20,6 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
-
 import static org.junit.Assert.assertEquals;
 
 /**

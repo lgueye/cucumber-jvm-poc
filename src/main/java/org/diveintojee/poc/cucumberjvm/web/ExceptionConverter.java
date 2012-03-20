@@ -105,6 +105,7 @@ public class ExceptionConverter {
   public ResponseError toResponseError(final Throwable th, final HttpServletRequest request) {
     final String message = resolveMesage(request, th);
     final int httpStatus = resolveHttpStatus(th);
-    return new ResponseError(message, httpStatus);
+    final ResponseError error = new ResponseError(message, httpStatus);
+    return error;
   }
 }

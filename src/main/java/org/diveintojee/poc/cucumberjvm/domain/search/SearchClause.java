@@ -47,12 +47,13 @@ public class SearchClause {
     String[] clause = queryString.split(SearchOperator.EXACT_MATCH.getToken());
     String field = clause[0];
     String value = clause[1];
-    
+
     if (StringUtils.isEmpty(value)) {
       return null;
     }
 
-    return new SearchClause(StringUtils.trim(field), SearchOperator.EXACT_MATCH, StringUtils.trim(value));
+    return new SearchClause(StringUtils.trim(field), SearchOperator.EXACT_MATCH,
+                            StringUtils.trim(value));
 
   }
 

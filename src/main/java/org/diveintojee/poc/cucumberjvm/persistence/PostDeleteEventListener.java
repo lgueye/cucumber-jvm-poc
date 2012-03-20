@@ -17,7 +17,7 @@ public class PostDeleteEventListener extends AbstractPostEventListener
     }
 
     removeFromIndex(event.getEntity());
-    
+
   }
 
   private static final long serialVersionUID = -4148539712224089605L;

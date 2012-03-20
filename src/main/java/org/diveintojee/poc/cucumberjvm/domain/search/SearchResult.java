@@ -1,8 +1,8 @@
 package org.diveintojee.poc.cucumberjvm.domain.search;
 
-import java.util.List;
-
 import org.diveintojee.poc.cucumberjvm.domain.Classified;
+
+import java.util.List;
 
 
 /**

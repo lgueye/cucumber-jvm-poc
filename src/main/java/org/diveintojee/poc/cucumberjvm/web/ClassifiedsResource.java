@@ -46,7 +46,8 @@ public class ClassifiedsResource {
     final
     URI
         uri =
-        this.uriInfo.getBaseUriBuilder().path(ClassifiedResource.class).path(String.valueOf(id)).build();
+        this.uriInfo.getBaseUriBuilder().path(ClassifiedResource.class).path(String.valueOf(id))
+            .build();
 
     return Response.created(uri).build();
 
@@ -55,9 +56,14 @@ public class ClassifiedsResource {
   @GET
   @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
   public Response findByCriteria(@DefaultValue(StringUtils.EMPTY) @QueryParam("q") String query,
-                                 @DefaultValue(StringUtils.EMPTY + SearchQuery.DEFAULT_ITEMS_PER_PAGE) @QueryParam("itemsPerPage") int itemsPerPage,
-                                 @DefaultValue(StringUtils.EMPTY + SearchQuery.DEFAULT_PAGE_INDEX) @QueryParam("pageIndex") int pageIndex,
-                                 @DefaultValue(StringUtils.EMPTY) @QueryParam("sort") Set<String> sort) throws Throwable {
+                                 @DefaultValue(StringUtils.EMPTY
+                                               + SearchQuery.DEFAULT_ITEMS_PER_PAGE) @QueryParam(
+                                     "itemsPerPage") int itemsPerPage,
+                                 @DefaultValue(StringUtils.EMPTY
+                                               + SearchQuery.DEFAULT_PAGE_INDEX) @QueryParam(
+                                     "pageIndex") int pageIndex,
+                                 @DefaultValue(StringUtils.EMPTY) @QueryParam(
+                                     "sort") Set<String> sort) throws Throwable {
 
     final SearchQuery searchQuery = new SearchQuery(query, pageIndex, itemsPerPage, sort);
 
@@ -65,7 +71,7 @@ public class ClassifiedsResource {
 
     SearchRepresentation
         searchRepresentation =
-        SearchRepresentation.fromResults(searchResult, uriInfo);
+        SearchRepresentationBuilder.fromResults(searchResult, uriInfo);
 
     return Response.ok(searchRepresentation).build();
 

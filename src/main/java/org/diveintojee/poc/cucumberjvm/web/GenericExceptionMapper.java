@@ -48,6 +48,8 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
           .entity(error).build();
     }
 
-    return Response.status(error.getHttpStatus()).entity(error).build();
+    return Response.status(error.getHttpStatus()).entity(error).type(preferredResponseMediaType)
+        .build();
+
   }
 }

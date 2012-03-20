@@ -10,7 +10,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 
-
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;

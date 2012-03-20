@@ -16,7 +16,6 @@ import java.util.Set;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
-
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -30,7 +29,7 @@ import static org.mockito.Mockito.when;
  * User: lgueye Date: 12/03/12 Time: 13:45
  */
 @RunWith(MockitoJUnitRunner.class)
-public class SearchRepresentationTest {
+public class SearchRepresentationBuilderTest {
 
   @Test
   public void zeroPagesShouldSetUndefinedPaginationData() {
@@ -56,7 +55,7 @@ public class SearchRepresentationTest {
     items = null;
     uriInfo = mock(UriInfo.class);
     searchResult = new SearchResult(query, items, totalItems);
-    SearchRepresentation.fromResults(searchResult, uriInfo);
+    SearchRepresentationBuilder.fromResults(searchResult, uriInfo);
 
     // Then
     assertEquals(-1, searchResult.getFirstPageIndex());
@@ -101,7 +100,7 @@ public class SearchRepresentationTest {
     when(uriBuilder.build()).thenReturn(uri);
     totalItems = 1;
     searchResult = new SearchResult(query, items, totalItems);
-    SearchRepresentation.fromResults(searchResult, uriInfo);
+    SearchRepresentationBuilder.fromResults(searchResult, uriInfo);
 
     // Then
     assertEquals(0, searchResult.getFirstPageIndex());
@@ -147,7 +146,7 @@ public class SearchRepresentationTest {
     when(uriBuilder.build()).thenReturn(uri);
     totalItems = 3;
     searchResult = new SearchResult(query, items, totalItems);
-    SearchRepresentation.fromResults(searchResult, uriInfo);
+    SearchRepresentationBuilder.fromResults(searchResult, uriInfo);
 
     // Then
     assertEquals(0, searchResult.getFirstPageIndex());
@@ -192,7 +191,7 @@ public class SearchRepresentationTest {
     when(uriBuilder.build()).thenReturn(uri);
     totalItems = 3;
     searchResult = new SearchResult(query, items, totalItems);
-    SearchRepresentation.fromResults(searchResult, uriInfo);
+    SearchRepresentationBuilder.fromResults(searchResult, uriInfo);
 
     // Then
     assertEquals(0, searchResult.getFirstPageIndex());
@@ -240,7 +239,7 @@ public class SearchRepresentationTest {
     when(uriBuilder.build()).thenReturn(uri);
     totalItems = 9;
     searchResult = new SearchResult(query, items, totalItems);
-    SearchRepresentation.fromResults(searchResult, uriInfo);
+    SearchRepresentationBuilder.fromResults(searchResult, uriInfo);
 
     // Then
     assertEquals(0, searchResult.getFirstPageIndex());
@@ -287,7 +286,7 @@ public class SearchRepresentationTest {
     when(uriBuilder.build()).thenReturn(uri);
     totalItems = 9;
     searchResult = new SearchResult(query, items, totalItems);
-    SearchRepresentation.fromResults(searchResult, uriInfo);
+    SearchRepresentationBuilder.fromResults(searchResult, uriInfo);
     // When
     verify(uriBuilder, times(5)).queryParam("q", query.getQuery());
     verify(uriBuilder, times(5)).queryParam("sort", sortValue);

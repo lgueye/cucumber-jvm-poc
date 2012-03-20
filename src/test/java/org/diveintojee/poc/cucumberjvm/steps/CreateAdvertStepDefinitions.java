@@ -9,8 +9,6 @@ import org.diveintojee.poc.cucumberjvm.TestUtils;
 import org.diveintojee.poc.cucumberjvm.domain.Classified;
 import org.diveintojee.poc.cucumberjvm.domain.ResponseError;
 
-import java.util.concurrent.ExecutionException;
-
 import javax.servlet.http.HttpServletResponse;
 
 import cucumber.annotation.en.Given;
@@ -25,7 +23,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class CreateAdvertStepDefinitions {
 
-  private final String user = null;
   private String language = null;
   private Classified advert;
   private ClientResponse clientResponse;
@@ -59,7 +56,7 @@ public class CreateAdvertStepDefinitions {
   }
 
   @When("^I try to create the advert$")
-  public void I_try_to_create() throws ExecutionException, InterruptedException {
+  public void I_try_to_create() {
     clientResponse = TestUtils.createAdvert(advert, requestFormat, null, this.language);
   }
 
@@ -89,4 +86,5 @@ public class CreateAdvertStepDefinitions {
     final ResponseError responseError = clientResponse.getEntity(ResponseError.class);
     assertEquals(errorMessage, responseError.getMessage());
   }
+
 }

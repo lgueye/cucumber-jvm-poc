@@ -19,7 +19,6 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -52,6 +51,22 @@ public class ValidationTestIT {
     // Given
     LocaleContextHolder.setLocale(Locale.ENGLISH);
     errorMessage = "Title max length is " + Classified.CONSTRAINT_TITLE_MAX_SIZE;
+    propertyPath = "title";
+    classified.setTitle(
+        RandomStringUtils.random(Classified.CONSTRAINT_TITLE_MAX_SIZE + 1, TestUtils.CHARS));
+
+    // When
+    violations = underTest.validate(classified);
+
+    // Then
+    assertEquals(1, CollectionUtils.size(violations));
+    violation = violations.iterator().next();
+    assertEquals(errorMessage, violation.getMessage());
+    assertEquals(propertyPath, violation.getPropertyPath().toString());
+
+    // Given
+    LocaleContextHolder.setLocale(Locale.FRENCH);
+    errorMessage = "Taille maximale du titre : " + Classified.CONSTRAINT_TITLE_MAX_SIZE;
     propertyPath = "title";
     classified.setTitle(
         RandomStringUtils.random(Classified.CONSTRAINT_TITLE_MAX_SIZE + 1, TestUtils.CHARS));

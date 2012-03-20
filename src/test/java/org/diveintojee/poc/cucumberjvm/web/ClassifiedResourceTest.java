@@ -1,39 +1,20 @@
 package org.diveintojee.poc.cucumberjvm.web;
 
-import org.diveintojee.poc.cucumberjvm.TestUtils;
 import org.diveintojee.poc.cucumberjvm.domain.Classified;
 import org.diveintojee.poc.cucumberjvm.domain.Facade;
-import org.diveintojee.poc.cucumberjvm.domain.search.OrderBy;
-import org.diveintojee.poc.cucumberjvm.domain.search.SearchQuery;
-import org.diveintojee.poc.cucumberjvm.domain.search.SearchResult;
-import org.diveintojee.poc.cucumberjvm.domain.search.SortOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;

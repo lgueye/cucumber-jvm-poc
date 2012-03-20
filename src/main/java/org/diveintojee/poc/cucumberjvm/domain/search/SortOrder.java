@@ -16,7 +16,9 @@ public enum SortOrder {
 
   public static SortOrder fromString(String input) {
     for (SortOrder sortOrder : values()) {
-      if (sortOrder.getValue().equals(input)) return sortOrder;
+      if (sortOrder.getValue().equals(input)) {
+        return sortOrder;
+      }
     }
     return null;
   }

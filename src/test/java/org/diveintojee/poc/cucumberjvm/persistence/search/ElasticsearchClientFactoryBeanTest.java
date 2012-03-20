@@ -1,6 +1,5 @@
 package org.diveintojee.poc.cucumberjvm.persistence.search;
 
-import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,10 +7,9 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.StringUtils.abbreviate;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertEquals;
 
 /**
  * User: lgueye Date: 12/03/12 Time: 10:49

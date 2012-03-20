@@ -27,7 +27,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -117,7 +116,9 @@ public class ClassifiedsResourceTest {
     itemsPerPage = 2;
     pageIndex = 1;
     sort = new HashSet<String>(Arrays.asList("created:desc", "status:asc"));
-    expectedSort = new HashSet<OrderBy>(Arrays.asList(OrderBy.DEFAULT, new OrderBy("status", SortOrder.ASCENDING)));
+    expectedSort =
+        new HashSet<OrderBy>(
+            Arrays.asList(OrderBy.DEFAULT, new OrderBy("status", SortOrder.ASCENDING)));
     searchResults = mock(SearchResult.class);
     when(facade.search(Matchers.<SearchQuery>any(SearchQuery.class))).thenReturn(searchResults);
     uriInfo = mock(UriInfo.class);
@@ -137,7 +138,7 @@ public class ClassifiedsResourceTest {
     verifyZeroInteractions(uriInfo);
 
     assertTrue(response.getStatus() == HttpServletResponse.SC_OK);
-    SearchResult entity = (SearchResult)response.getEntity();
+    SearchResult entity = (SearchResult) response.getEntity();
     assertNotNull(entity);
     List<Classified> items = entity.getItems();
     assertSame(results, items);

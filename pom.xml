@@ -186,6 +186,11 @@
                 <version>${jackson.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-xc</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.elasticsearch</groupId>
                 <artifactId>elasticsearch</artifactId>
                 <version>${elasticsearch.version}</version>
@@ -261,6 +266,20 @@
                 <groupId>com.sun.jersey</groupId>
                 <artifactId>jersey-json</artifactId>
                 <version>${jersey.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.codehaus.jettison</groupId>
+                        <artifactId>jettison</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.sun.xml.bind</groupId>
+                        <artifactId>jaxb-impl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.codehaus.jackson</groupId>
+                        <artifactId>jackson-xc</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
@@ -363,6 +382,10 @@
             <artifactId>jackson-mapper-asl</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-xc</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
         </dependency>
@@ -383,6 +406,18 @@
             <artifactId>cglib</artifactId>
         </dependency>
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
         </dependency>
@@ -391,28 +426,21 @@
             <artifactId>jersey-spring</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey.contribs</groupId>
             <artifactId>jersey-apache-client4</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-jaxrs</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>apache-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.7.0</version>
         </dependency>
     </dependencies>
 
@@ -503,9 +531,9 @@
                             <version>${h2.version}</version>
                         </dependency>
                         <!--<dependency>-->
-                            <!--<groupId>commons-dbcp</groupId>-->
-                            <!--<artifactId>commons-dbcp</artifactId>-->
-                            <!--<version>${commons-dbcp.version}</version>-->
+                        <!--<groupId>commons-dbcp</groupId>-->
+                        <!--<artifactId>commons-dbcp</artifactId>-->
+                        <!--<version>${commons-dbcp.version}</version>-->
                         <!--</dependency>-->
                     </dependencies>
                     <configuration>
@@ -607,7 +635,7 @@
                                 <argument>org.diveintojee.poc.cucumberjvm.steps</argument>
                                 <argument>target/test-classes</argument>
                                 <argument>--tags</argument>
-                                <argument>~@done,${cucumber.profile}</argument>
+                                <argument>${cucumber.tags}</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -666,7 +694,7 @@
                 <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
                 <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
                 <hibernate.show_sql>false</hibernate.show_sql>
-                <cucumber.profile>@wip</cucumber.profile>
+                <cucumber.tags>~@done,@wip</cucumber.tags>
                 <search.engine.remote.nodes/>
             </properties>
         </profile>

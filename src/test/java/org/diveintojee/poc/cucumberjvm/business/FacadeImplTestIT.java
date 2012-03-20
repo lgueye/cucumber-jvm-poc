@@ -20,7 +20,6 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -180,7 +179,7 @@ public class FacadeImplTestIT {
 
     // Then
     assertTrue(classifieds.size() == 0);
-    
+
   }
 
 

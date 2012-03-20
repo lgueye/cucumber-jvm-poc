@@ -1,9 +1,6 @@
 package org.diveintojee.poc.cucumberjvm.persistence;
 
-import org.diveintojee.poc.cucumberjvm.domain.Classified;
-import org.diveintojee.poc.cucumberjvm.persistence.search.SearchEngine;
 import org.hibernate.event.spi.PostInsertEvent;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 

@@ -114,7 +114,9 @@ public class SearchQueryTest {
     itemsPerPage = 5;
     pageIndex = 2;
     sort = new HashSet<String>(asList("id:asc"));
-    Set<OrderBy> expectedSort = new HashSet<OrderBy>(asList(new OrderBy("id", SortOrder.ASCENDING)));
+    Set<OrderBy>
+        expectedSort =
+        new HashSet<OrderBy>(asList(new OrderBy("id", SortOrder.ASCENDING)));
     query = new SearchQuery(queryString, pageIndex, itemsPerPage, sort);
 
     // Then ...

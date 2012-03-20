@@ -42,8 +42,9 @@ public class SearchQuery {
 
       OrderBy orderBy = OrderBy.parse(orderByAsString);
 
-      if (orderBy != null)
+      if (orderBy != null) {
         orderBys.add(orderBy);
+      }
 
     }
 

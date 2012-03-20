@@ -10,7 +10,6 @@ import javax.validation.ValidationException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

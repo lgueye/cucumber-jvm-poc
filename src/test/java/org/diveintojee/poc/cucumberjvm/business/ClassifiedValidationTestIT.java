@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.validation.ConstraintViolationException;
 
-
 import static org.junit.Assert.fail;
 
 /**

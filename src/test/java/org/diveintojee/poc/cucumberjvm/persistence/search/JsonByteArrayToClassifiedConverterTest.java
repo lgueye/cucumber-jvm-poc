@@ -12,7 +12,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 
-
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;

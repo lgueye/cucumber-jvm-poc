@@ -1,5 +1,8 @@
 package org.diveintojee.poc.cucumberjvm.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -55,4 +58,11 @@ public class ResponseError {
     this.httpStatus = httpStatus;
   }
 
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).
+        append("message", message).
+        append("httpStatus", httpStatus).
+        toString();
+  }
 }

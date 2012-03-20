@@ -2,7 +2,6 @@ package org.diveintojee.poc.cucumberjvm.domain.search;
 
 import org.junit.Test;
 
-import static org.diveintojee.poc.cucumberjvm.domain.search.SortOrder.ASCENDING;
 import static org.diveintojee.poc.cucumberjvm.domain.search.SortOrder.DESCENDING;
 import static org.junit.Assert.assertEquals;
 

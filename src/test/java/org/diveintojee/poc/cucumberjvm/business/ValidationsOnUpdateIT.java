@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 
-
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 /**
@@ -23,7 +22,7 @@ public class ValidationsOnUpdateIT extends BaseValidations {
   private Classified classified;
 
   private static final int OPERATION = BaseValidations.UPDATE_OPERATION;
-  
+
   @Before
   public final void before() {
     classified = TestUtils.validClassified();

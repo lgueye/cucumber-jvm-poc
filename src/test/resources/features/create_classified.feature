@@ -1,17 +1,17 @@
 # language: en
-Feature: a user can create adverts
-  As a user
-  I want to create adverts
+Feature: A customer can create adverts
+  As a customer
+  I want to create classifieds
 
   @done
   @#1
-  Scenario Outline: A customer can create an advert
+  Scenario Outline: A customer can create a classified
     Given I am a customer
-    And a valid advert
+    And a valid classified
     And I send "<format>"
-    When I try to create the advert
+    When I try to create the classified
     Then the creation is successful
-    When I load the advert as "<format>"
+    When I load the classified as "<format>"
     Then its status is "draft"
   Examples:
     | format           |
@@ -21,13 +21,13 @@ Feature: a user can create adverts
   @done
   @#2
 
-  Scenario Outline: A customer can't create an advert with an invalid title
+  Scenario Outline: A customer can't create an classified with an invalid title
     Given I am a customer
     And I use "<language>" language
     And I send "application/json"
-    And a valid advert
+    And a valid classified
     And I set "title" to "<wrong_data>"
-    When I try to create the advert
+    When I try to create the classified
     Then the creation fails
     And the error message is "<error_message>"
   Examples:

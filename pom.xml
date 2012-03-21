@@ -630,6 +630,8 @@
                             <mainClass>cucumber.cli.Main</mainClass>
                             <arguments>
                                 <argument>--format</argument>
+                                <argument>html:target/reports</argument>
+                                <argument>--format</argument>
                                 <argument>pretty</argument>
                                 <argument>--glue</argument>
                                 <argument>org.diveintojee.poc.cucumberjvm.steps</argument>
@@ -694,7 +696,26 @@
                 <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
                 <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
                 <hibernate.show_sql>false</hibernate.show_sql>
-                <cucumber.tags>~@done,@wip</cucumber.tags>
+                <cucumber.tags>~@done</cucumber.tags>
+                <search.engine.remote.nodes/>
+            </properties>
+        </profile>
+        <profile>
+            <id>embedded-done</id>
+            <properties>
+                <container.host>localhost</container.host>
+                <container.port>9090</container.port>
+                <webapp.module.context>${project.build.finalName}</webapp.module.context>
+                <javax.persistence.jdbc.driver>org.h2.Driver</javax.persistence.jdbc.driver>
+                <javax.persistence.jdbc.url>
+                    jdbc:h2:mem:webservice-bootstrap-test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;IGNORECASE=true
+                </javax.persistence.jdbc.url>
+                <javax.persistence.jdbc.user>sa</javax.persistence.jdbc.user>
+                <javax.persistence.jdbc.password/>
+                <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+                <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+                <hibernate.show_sql>false</hibernate.show_sql>
+                <cucumber.tags>~@wip</cucumber.tags>
                 <search.engine.remote.nodes/>
             </properties>
         </profile>

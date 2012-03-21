@@ -1,15 +1,16 @@
 # language: en
-Feature: : un client peut rechercher des annonces classées
-  En tant que client
-  Je souhaite rechercher une annonce
+@done
+Feature: : A customer can search classifieds by criteria
+  As a customer
+  I want to search classifieds by criteria
 
-  Background: :
+  Background:
     Given the repository:
       | title                            | description                                                                                                                                                                                                                                    | price    | reference | email                  | location.streetAddress         | location.city      | location.postalCode | location.countryCode |
       | Vente Appartement 4 pièces       | Comme neuf !! Ce grand 4 pièces, situé dans une rue calme, proche de la défense, vient d'être refait a neuf. Cuisine équipée, terrasse, WC séparés                                                                                             | 394000.0 | REF-00001 | foo@bar.com            | 5 rue Marcel Sembat            | Courbevoie         | 92400               | fr                   |
       | Chef de projet marketing web h/f | Sous l’autorité du responsable marketing France, vous serez en charge de la définition d'actions marketing, de leur mise en œuvre, ainsi que de leur suivi. Votre objectif sera de développer le trafic et les ventes de nos sites partenaires | 70000.0  | REF-00002 | apply@vente-privee.com | 249 Avenue du Président Wilson | La Plaine St Denis | 93210               | fr                   |
 
-  @wip
+  @done
   @#3
 
   Scenario: A customer can search classifieds by status (exact match)
@@ -21,7 +22,7 @@ Feature: : un client peut rechercher des annonces classées
       | Chef de projet marketing web h/f | 70000.0  | REF-00002 | apply@vente-privee.com | 249 Avenue du Président Wilson | La Plaine St Denis | 93210               | fr                   |
       | Vente Appartement 4 pièces       | 394000.0 | REF-00001 | foo@bar.com            | 5 rue Marcel Sembat            | Courbevoie         | 92400               | fr                   |
 
-  @wip
+  @done
   @#4
 
   Scenario: A customer can search classifieds by reference (exact match)
@@ -32,7 +33,7 @@ Feature: : un client peut rechercher des annonces classées
       | title                            | price   | reference | email                  | location.streetAddress         | location.city      | location.postalCode | location.countryCode |
       | Chef de projet marketing web h/f | 70000.0 | REF-00002 | apply@vente-privee.com | 249 Avenue du Président Wilson | La Plaine St Denis | 93210               | fr                   |
 
-  @wip
+  @done
   @#5
 
   Scenario: A customer can search classifieds by email (exact match)
@@ -43,7 +44,7 @@ Feature: : un client peut rechercher des annonces classées
       | title                            | price   | reference | email                  | location.streetAddress         | location.city      | location.postalCode | location.countryCode |
       | Chef de projet marketing web h/f | 70000.0 | REF-00002 | apply@vente-privee.com | 249 Avenue du Président Wilson | La Plaine St Denis | 93210               | fr                   |
 
-  @wip
+  @done
   @#6
 
   Scenario: A customer can search classifieds by country code (exact match)
@@ -55,7 +56,7 @@ Feature: : un client peut rechercher des annonces classées
       | Chef de projet marketing web h/f | 70000.0  | REF-00002 | apply@vente-privee.com | 249 Avenue du Président Wilson | La Plaine St Denis | 93210               | fr                   |
       | Vente Appartement 4 pièces       | 394000.0 | REF-00001 | foo@bar.com            | 5 rue Marcel Sembat            | Courbevoie         | 92400               | fr                   |
 
-  @wip
+  @done
   @#7
 
   Scenario: A customer can search classifieds by postal code (full text)
@@ -66,7 +67,7 @@ Feature: : un client peut rechercher des annonces classées
       | title                            | price   | reference | email                  | location.streetAddress         | location.city      | location.postalCode | location.countryCode |
       | Chef de projet marketing web h/f | 70000.0 | REF-00002 | apply@vente-privee.com | 249 Avenue du Président Wilson | La Plaine St Denis | 93210               | fr                   |
 
-  @wip
+  @done
   @#8
 
   Scenario: A customer can search classifieds by location.city (full text)
@@ -77,7 +78,7 @@ Feature: : un client peut rechercher des annonces classées
       | title                            | price   | reference | email                  | location.streetAddress         | location.city      | location.postalCode | location.countryCode |
       | Chef de projet marketing web h/f | 70000.0 | REF-00002 | apply@vente-privee.com | 249 Avenue du Président Wilson | La Plaine St Denis | 93210               | fr                   |
 
-  @wip
+  @done
   @#9
 
   Scenario: A customer can search classifieds by street address (full text)
@@ -88,7 +89,7 @@ Feature: : un client peut rechercher des annonces classées
       | title                            | price   | reference | email                  | location.streetAddress         | location.city      | location.postalCode | location.countryCode |
       | Chef de projet marketing web h/f | 70000.0 | REF-00002 | apply@vente-privee.com | 249 Avenue du Président Wilson | La Plaine St Denis | 93210               | fr                   |
 
-  @wip
+  @done
   @#10
 
   Scenario: A customer can search classifieds by description (full text)
@@ -99,7 +100,7 @@ Feature: : un client peut rechercher des annonces classées
       | title                      | price    | reference | email       | location.streetAddress | location.city | location.postalCode | location.countryCode |
       | Vente Appartement 4 pièces | 394000.0 | REF-00001 | foo@bar.com | 5 rue Marcel Sembat    | Courbevoie    | 92400               | fr                   |
 
-  @wip
+  @done
   @#11
 
   Scenario: A customer can search classifieds by title (full text)

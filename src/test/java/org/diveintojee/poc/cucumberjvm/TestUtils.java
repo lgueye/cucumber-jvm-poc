@@ -3,7 +3,6 @@ package org.diveintojee.poc.cucumberjvm;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.client.filter.LoggingFilter;
 import com.sun.jersey.api.json.JSONConfiguration;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -17,7 +16,7 @@ import org.diveintojee.poc.cucumberjvm.web.SearchRepresentation;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URLEncoder;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +25,7 @@ import java.util.ResourceBundle;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.ws.rs.core.UriBuilder;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -46,7 +46,7 @@ public class TestUtils {
     config.getClasses().add(JacksonJsonProvider.class);
     config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
     jerseyClient = Client.create(config);
-    jerseyClient.addFilter(new LoggingFilter());
+    //jerseyClient.addFilter(new LoggingFilter());
   }
 
   public static Classified validClassified() {
@@ -89,15 +89,15 @@ public class TestUtils {
     assertEquals(propertyPath, violation.getPropertyPath().toString());
   }
 
-  public static ClientResponse createAdvert(Classified advert, String requestFormat,
-                                            String responseFormat, String language) {
+  public static ClientResponse createClassified(Classified classified, String requestFormat,
+                                                String responseFormat, String language) {
 
     return jerseyClient.resource(baseEndPoint + "/classifieds").acceptLanguage(language)
-        .type(requestFormat).accept(responseFormat).post(ClientResponse.class, advert);
+        .type(requestFormat).accept(responseFormat).post(ClientResponse.class, classified);
 
   }
 
-  public static ClientResponse loadAdvert(String uri, String responseFormat) {
+  public static ClientResponse loadClassified(String uri, String responseFormat) {
 
     return jerseyClient.resource(uri).accept(responseFormat).get(ClientResponse.class);
 
@@ -126,38 +126,96 @@ public class TestUtils {
       classified.getLocation().setCity(row.get(6));
       classified.getLocation().setPostalCode(row.get(7));
       classified.getLocation().setCountryCode(row.get(8));
-      TestUtils.createAdvert(classified, "application/json", "application/json", "en");
+      TestUtils.createClassified(classified, "application/json", "application/json", "en");
     }
   }
 
   public static SearchRepresentation findClassifiedsByCriteria(String field, String value,
-                                                               boolean exact)
+                                                               boolean exact, int pageIndex,
+                                                               int itemsPerPage, String sort)
       throws UnsupportedEncodingException {
-    String key = "q";
-    String val = field + ":" + value + (!(exact) ? "*" : "");
-    String queryString = "q=" + URLEncoder.encode(val, "utf-8");
-    return jerseyClient.resource(baseEndPoint + "/classifieds?" + queryString)
+
+    UriBuilder builder = UriBuilder.fromPath(baseEndPoint + "/classifieds");
+
+    if (StringUtils.isNotEmpty(value)) {
+      String terms;
+      String wildcard = (!(exact) ? "*" : "");
+      final String pattern = "{0}:{1}{2}";
+      if (StringUtils.isEmpty(field)) {
+        terms = MessageFormat.format(pattern, "_all", value, wildcard);
+      } else {
+        terms = MessageFormat.format(pattern, field, value, wildcard);
+      }
+      builder.queryParam("q", terms);
+    }
+
+    if (pageIndex > -1) {
+      builder.queryParam("pageIndex", pageIndex);
+    }
+
+    if (itemsPerPage > -1) {
+      builder.queryParam("itemsPerPage", itemsPerPage);
+    }
+
+    if (StringUtils.isNotEmpty(sort)) {
+      builder.queryParam("sort", sort);
+    }
+
+    return jerseyClient.resource(builder.build())
         .accept("application/xml").type("application/x-www-form-urlencoded").get(
             SearchRepresentation.class);
   }
 
-  public static void diffTable(List<List<String>> table, List<Classified> results)
+  public static void diffTable(List<List<String>> cucumberTable, List<Classified> results)
       throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-    List<String> headers = table.get(0);
-    for (int i = 1; i < table.size(); i++) {
-      List<String> expectedRow = table.get(i);
-      Classified classified = results.get(i - 1);
-      Map<String, Object> expectedRowAsMap = new HashMap<String, Object>(results.size());
-      Map<String, Object> actualRowAsMap = new HashMap<String, Object>(results.size());
-      for (int j = 0; j < headers.size(); j++) {
-        expectedRowAsMap.put(headers.get(j), expectedRow.get(j));
-        actualRowAsMap.put(headers.get(j), BeanUtils.getProperty(classified, headers.get(j)));
-      }
-      for (String key : actualRowAsMap.keySet()) {
-        Object actualValue = actualRowAsMap.get(key);
-        Object expectedValue = expectedRowAsMap.get(key);
-        assertEquals(expectedValue, actualValue);
-      }
+
+    final int cucumberTableSize = cucumberTable.size();
+
+    if (CollectionUtils.isEmpty(cucumberTable) || cucumberTableSize == 1) {
+      return;
     }
+
+    int rowIndex = 0;
+
+    List<String> headers = cucumberTable.get(rowIndex);
+
+    for (rowIndex = 1; rowIndex < cucumberTableSize; rowIndex++) {
+
+      List<String> expectedRow = cucumberTable.get(rowIndex);
+
+      Classified classified = CollectionUtils.isEmpty(results) ? null : results.get(rowIndex - 1);
+
+      Map<String, Object> expectedRowAsMap = new HashMap<String, Object>(cucumberTableSize - 1);
+
+      Map<String, Object> actualRowAsMap = new HashMap<String, Object>(cucumberTableSize - 1);
+
+      for (int columnIndex = 0; columnIndex < headers.size(); columnIndex++) {
+
+        final String columnName = headers.get(columnIndex);
+
+        final String expectedColumnValue = expectedRow.get(columnIndex);
+        expectedRowAsMap.put(columnName, expectedColumnValue);
+
+        final
+        String
+            actualColumnValue =
+            (classified == null) ? null : BeanUtils.getProperty(classified, columnName);
+        actualRowAsMap.put(columnName, actualColumnValue);
+
+      }
+
+      for (String key : actualRowAsMap.keySet()) {
+
+        Object actualValue = actualRowAsMap.get(key);
+
+        Object expectedValue = expectedRowAsMap.get(key);
+
+        assertEquals(expectedValue, actualValue);
+
+      }
+
+    }
+
   }
+
 }

@@ -16,9 +16,6 @@
     </prerequisites>
 
     <properties>
-        <tagArg>@wip</tagArg>
-        <format>html</format>
-
         <!-- TEST -->
         <asm.version>3.2</asm.version>
         <antlr.version>3.4</antlr.version>
@@ -507,68 +504,6 @@
                     <groupId>org.mortbay.jetty</groupId>
                     <artifactId>maven-jetty-plugin</artifactId>
                     <version>${jetty.version}</version>
-                    <dependencies>
-                        <!-- If not added, jetty complains about spring namespace schemas location
-                               that are not found -->
-                        <dependency>
-                            <groupId>org.springframework</groupId>
-                            <artifactId>spring-context</artifactId>
-                            <version>${spring.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.springframework</groupId>
-                            <artifactId>spring-webmvc</artifactId>
-                            <version>${spring.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.springframework</groupId>
-                            <artifactId>spring-tx</artifactId>
-                            <version>${spring.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.h2database</groupId>
-                            <artifactId>h2</artifactId>
-                            <version>${h2.version}</version>
-                        </dependency>
-                        <!--<dependency>-->
-                        <!--<groupId>commons-dbcp</groupId>-->
-                        <!--<artifactId>commons-dbcp</artifactId>-->
-                        <!--<version>${commons-dbcp.version}</version>-->
-                        <!--</dependency>-->
-                    </dependencies>
-                    <configuration>
-                        <contextPath>${webapp.module.context}</contextPath>
-                        <connectors>
-                            <connector
-                                    implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                                <port>${container.port}</port>
-                                <maxIdleTime>60000</maxIdleTime>
-                            </connector>
-                        </connectors>
-                        <scanIntervalSeconds>10</scanIntervalSeconds>
-                        <stopKey>foo</stopKey>
-                        <stopPort>9180</stopPort>
-                        <tmpDirectory>${java.io.tmpdir}</tmpDirectory>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>start-jetty</id>
-                            <phase>pre-integration-test</phase>
-                            <goals>
-                                <goal>deploy-war</goal>
-                            </goals>
-                            <configuration>
-                                <daemon>true</daemon>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>stop-jetty</id>
-                            <phase>post-integration-test</phase>
-                            <goals>
-                                <goal>stop</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -589,29 +524,82 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-            <!-- First run Integration Tests-->
+            <!-- First run a container, deploy your artifact to that container-->
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <dependencies>
+                    <!-- If not added, jetty complains about spring namespace schemas location
+                           that are not found -->
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-context</artifactId>
+                        <version>${spring.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-webmvc</artifactId>
+                        <version>${spring.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-tx</artifactId>
+                        <version>${spring.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>${h2.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <contextPath>${webapp.module.context}</contextPath>
+                    <connectors>
+                        <connector
+                                implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>${container.port}</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <stopKey>foo</stopKey>
+                    <stopPort>9180</stopPort>
+                    <tmpDirectory>${java.io.tmpdir}</tmpDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>deploy-war</goal>
+                        </goals>
+                        <configuration>
+                            <daemon>true</daemon>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Second run Integration Tests-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>integration-test</id>
+                        <phase>integration-test</phase>
                         <goals>
                             <goal>integration-test</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>verify</id>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
                 </executions>
-            </plugin>
-            <!-- Second run a container, deploy your artifact to that container-->
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
             </plugin>
             <!-- Then run Acceptance Tests-->
             <plugin>
@@ -632,7 +620,7 @@
                                 <argument>--format</argument>
                                 <argument>html:target/reports</argument>
                                 <argument>--format</argument>
-                                <argument>pretty</argument>
+                                <argument>progress</argument>
                                 <argument>--glue</argument>
                                 <argument>org.diveintojee.poc.cucumberjvm.steps</argument>
                                 <argument>target/test-classes</argument>

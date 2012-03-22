@@ -19,7 +19,7 @@
         <!-- TEST -->
         <asm.version>3.2</asm.version>
         <antlr.version>3.4</antlr.version>
-        <cucumber-jvm.version>1.0.0.RC21</cucumber-jvm.version>
+        <cucumber-jvm.version>1.0.0.RC20</cucumber-jvm.version>
         <cucumber-html.version>0.2.1</cucumber-html.version>
         <gherkin.version>2.9.1</gherkin.version>
         <junit.version>4.10</junit.version>
@@ -620,7 +620,7 @@
                                 <argument>--format</argument>
                                 <argument>html:target/reports</argument>
                                 <argument>--format</argument>
-                                <argument>progress</argument>
+                                <argument>pretty</argument>
                                 <argument>--glue</argument>
                                 <argument>org.diveintojee.poc.cucumberjvm.steps</argument>
                                 <argument>target/test-classes</argument>
